@@ -4,6 +4,14 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\OficinaController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect()->route('oficinas.index');
+});
+
+Route::post('empleados/{empleado}/move', [EmpleadoController::class, 'moveToDepartment'])->name('empleados.move');
+
+Route::post('empleados/{empleado}/desactivar', [EmpleadoController::class, 'desactivar'])->name('empleados.desactivar');
+
 Route::resource('oficinas', OficinaController::class);
 
 Route::get('oficinas/{oficina}/empleados/create', [EmpleadoController::class, 'create'])

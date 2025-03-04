@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Oficina;
 use Illuminate\Http\Request;
+use App\Models\Empleado;
 
 class OficinaController extends Controller
 {
@@ -48,23 +49,42 @@ class OficinaController extends Controller
      */
     public function show(Oficina $oficina)
     {
-        return view('oficinas.show', compact('oficina'));
+        $oficinas = Oficina::all();
+        return view('oficinas.show', compact('oficina', 'oficinas'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Oficina $oficina)
+    public function edit($id)
     {
-        //
+        // Buscar la oficina por su id
+        $oficina = Oficina::findOrFail($id);
+
+        // Retornar la vista 'edit' con la oficina cargada
+        return view('oficinas.edit', compact('oficina'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Oficina $oficina)
+    public function update(Request $request, $id)
     {
-        //
+        // Validar los datos de la oficina
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+        ]);
+
+        // Buscar la oficina por su id
+        $oficina = Oficina::findOrFail($id);
+
+        // Actualizar los datos de la oficina
+        $oficina->update([
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
+        ]);
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('oficinas.index')
+                         ->with('success', 'Oficina actualizada correctamente.');
     }
 
     /**
@@ -72,6 +92,16 @@ class OficinaController extends Controller
      */
     public function destroy(Oficina $oficina)
     {
-        //
+        // Verificar si la oficina tiene empleados
+        if ($oficina->empleados->isEmpty()) {
+            $oficina->delete();
+            return redirect()->route('oficinas.index')->with('success', 'Oficina eliminada correctamente.');
+        } else {
+            return redirect()->route('oficinas.show', $oficina->id)->with('error', 'No se puede eliminar la oficina porque tiene empleados asignados.');
+        }
     }
+
+
+
+
 }

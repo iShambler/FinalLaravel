@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Empleado</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
+    @include ('layouts.header')
     <div class="container mt-5">
         <h2 class="mb-4">Añadir Empleado</h2>
 
-        <form action="{{ route('empleados.store') }}" method="POST">
+        <form action="{{ route('empleados.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="oficina_id" value="{{ $oficina->id }}">
@@ -50,10 +52,17 @@
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto</label>
+                <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+            </div>
+
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="{{ route('oficinas.show', $oficina->id) }}" class="btn btn-secondary">Cancelar</a>
         </form>
+
     </div>
+    @include ('layouts.footer')
 </body>
 </html>
 

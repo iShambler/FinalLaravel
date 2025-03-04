@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dni')->unique();
             $table->string('email')->unique();
             $table->foreignId('oficina_id')->constrained()->onDelete('cascade');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
