@@ -32,12 +32,12 @@
                 <tbody>
                     @foreach ($oficinas as $oficina)
                         <tr>
-                            <!-- El nombre ahora es un enlace a los detalles de la oficina -->
+                         
                             <td><a class="text-decoration-none" href="{{ route('oficinas.show', $oficina->id) }}">{{ $oficina->nombre }}</a></td>
                             <td>{{ $oficina->direccion }}</td>
                             <td>
                                 <div class="d-flex justify-content-end">
-                                    <!-- Formulario de Eliminar Oficina -->
+
                                     <form action="{{ route('oficinas.destroy', $oficina->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -45,7 +45,7 @@
                                             Eliminar Oficina
                                         </button>
                                     </form>
-                                    <!-- Editar Oficina con el ID correcto -->
+
                                     <a href="{{ route('oficinas.edit', $oficina->id) }}" class="btn btn-primary btn-sm">Editar Oficina</a>
                                 </div>
                             </td>

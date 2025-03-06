@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <!-- Incluir encabezado -->
+
     @include('layouts.header')
 
     <div class="container mt-5">
@@ -17,9 +17,9 @@
 
         <form action="{{ route('oficinas.update', $oficina->id) }}" method="POST">
             @csrf
-            @method('PUT') <!-- Esto indica que estamos haciendo una actualización -->
+            @method('PUT')
 
-            <!-- Campo para el nombre de la oficina -->
+
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $oficina->nombre) }}" required>
@@ -28,7 +28,7 @@
                 @enderror
             </div>
 
-            <!-- Campo para la dirección de la oficina -->
+
             <div class="mb-3">
                 <label for="direccion" class="form-label">Dirección</label>
                 <input type="text" class="form-control" id="direccion" name="direccion" value="{{ old('direccion', $oficina->direccion) }}" required>
@@ -37,13 +37,13 @@
                 @enderror
             </div>
 
-            <!-- Botones de acción -->
+
             <button type="submit" class="btn btn-primary mb-3">Guardar Cambios</button>
             <a href="{{ route('oficinas.index') }}" class="btn btn-secondary mb-3">Volver</a>
         </form>
     </div>
 
-    <!-- Incluir pie de página -->
+
     @include('layouts.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -58,25 +58,25 @@ class OficinaController extends Controller
      */
     public function edit($id)
     {
-        // Buscar la oficina por su id
+
         $oficina = Oficina::findOrFail($id);
 
-        // Retornar la vista 'edit' con la oficina cargada
+
         return view('oficinas.edit', compact('oficina'));
     }
 
     public function update(Request $request, $id)
     {
-        // Validar los datos de la oficina
+
         $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
         ]);
 
-        // Buscar la oficina por su id
+
         $oficina = Oficina::findOrFail($id);
 
-        // Actualizar los datos de la oficina
+
         $oficina->update([
             'nombre' => $request->nombre,
             'direccion' => $request->direccion,
@@ -92,7 +92,7 @@ class OficinaController extends Controller
      */
     public function destroy(Oficina $oficina)
     {
-        // Verificar si la oficina tiene empleados
+     
         if ($oficina->empleados->isEmpty()) {
             $oficina->delete();
             return redirect()->route('oficinas.index')->with('success', 'Oficina eliminada correctamente.');

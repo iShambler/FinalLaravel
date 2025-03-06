@@ -10,7 +10,6 @@ Route::get('/', function () {
 
 Route::post('empleados/{empleado}/move', [EmpleadoController::class, 'moveToDepartment'])->name('empleados.move');
 
-Route::post('empleados/{empleado}/desactivar', [EmpleadoController::class, 'desactivar'])->name('empleados.desactivar');
 
 Route::resource('oficinas', OficinaController::class);
 

@@ -12,10 +12,10 @@
     <div class="container mt-5">
         <h2 class="mb-4">Editar Empleado: {{ $empleado->nombre }}</h2>
 
-        <!-- Formulario de edición -->
+
         <form action="{{ route('empleados.update', $empleado->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')  <!-- Método PUT para la actualización -->
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre *</label>
@@ -58,7 +58,7 @@
             </div>
         </form>
 
-        <!-- Botón de eliminación (se puede agregar un formulario de eliminación) -->
+     
         <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST" class="mt-3">
             @csrf
             @method('DELETE')

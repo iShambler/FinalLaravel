@@ -16,7 +16,7 @@
         <a href="{{ route('empleados.create', $oficina->id) }}" class="btn btn-primary mb-3">Añadir Empleado</a>
 
 
-        <!-- Mensajes de éxito y error -->
+
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -55,7 +55,7 @@
                             </td>
                             <td class="text-center align-middle">{{ $empleado->dni }}</td>
                             <td class="text-center align-middle" >
-                                <!-- Formulario para mover al empleado a otro departamento -->
+                             
                                 <form action="{{ route('empleados.move', $empleado->id) }}" method="POST" class="d-inline d-flex justify-content-center align-items-center">
                                     @csrf
                                     <input type="hidden" name="current_oficina_id" value="{{ $oficina->id }}">
